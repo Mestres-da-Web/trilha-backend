@@ -62,4 +62,4 @@ jobs:
             cd ~/apps/marketplace
             yarn
             ./node_modules/.bin/typeorm migration:run
-            pm2 restart clickpetroleo-api
+            pm2 restart marketplace
