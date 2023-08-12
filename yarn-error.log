@@ -1,8 +1,8 @@
 Arguments: 
-  D:\Program Files\nodejs\node.exe C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add express-async-erros
+  D:\Program Files\nodejs\node.exe C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js dev
 
 PATH: 
-  C:\Python311\Scripts\;C:\Python311\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Guilherme\AppData\Local\Microsoft\WindowsApps;C:\Users\Guilherme\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Guilherme\AppData\Local\GitHubDesktop\bin;C:\Users\Guilherme\AppData\Roaming\npm
+  C:\Python311\Scripts\;C:\Python311\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Users\Guilherme\AppData\Local\Microsoft\WindowsApps;C:\Users\Guilherme\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Guilherme\AppData\Local\GitHubDesktop\bin;C:\Users\Guilherme\AppData\Roaming\npm
 
 Yarn version: 
   1.22.19
@@ -14,17 +14,12 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/express-async-erros: Not found
-      at params.callback [as _callback] (C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
-      at self.callback (C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
-      at Request.emit (node:events:513:28)
-      at Request.<anonymous> (C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
-      at Request.emit (node:events:513:28)
-      at IncomingMessage.<anonymous> (C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
-      at Object.onceWrapper (node:events:627:28)
-      at IncomingMessage.emit (node:events:525:35)
-      at endReadableNT (node:internal/streams/readable:1359:12)
-      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+  SyntaxError: C:\Projetos Mestres da Web\marketplace\package.json: Unexpected token / in JSON at position 304
+      at JSON.parse (<anonymous>)
+      at C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\Guilherme\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
 
 npm manifest: 
   {
@@ -34,11 +29,13 @@ npm manifest:
     "license": "MIT",
     "dependencies": {
       "express": "^4.18.2",
+      "express-async-errors": "^3.1.1",
       "pg": "^8.11.1",
       "tsconfig-paths": "^4.2.0",
       "tsyringe": "^4.8.0",
       "typeorm": "0.2.41",
       "uuid": "^9.0.0"
+      // teste
     },
     "scripts": {
       "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
