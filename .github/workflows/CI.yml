@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ homolog ]
+    branches: [homolog]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.2
         with:
-          node-version:  14.x
+          node-version: 14.x
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -26,7 +26,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
       # Instalar as dependências NPM/Yarn
       - name: Install dependencies
         run: yarn
@@ -35,9 +34,9 @@ jobs:
       - name: Run Build
         run: yarn build
 
-      #Executar os testes
-      # - name: Run Tests
-      #   run: yarn test
+      #       #Executar os testes
+      #       - name: Run Tests
+      #         run: yarn test
 
       # Copiar código para Digital Ocean
       - name: Copy dist to Digital Ocean
@@ -47,8 +46,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: ".,!node_modules"
-          target:  "~/apps/marketplace"
+          source: '.,!node_modules'
+          target: '~/apps/marketplace'
 
       # Executar yarn no digital ocean
       - name: Run production scripts
@@ -58,14 +57,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          script:  |
-            nvm install --lts
-            npm install -g yarn
-            npm install -g pm2
+          script: |
             cd ~/apps/marketplace
-            pwd
-            echo $USER
-            echo $PATH
             yarn
             ./node_modules/.bin/typeorm migration:run
             pm2 restart marketplace
