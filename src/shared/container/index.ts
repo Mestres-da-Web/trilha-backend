@@ -5,9 +5,13 @@ import { ISpecificationsRepository } from '../../modules/products/repositories/I
 import { SpecificationsRepository } from '../../modules/products/repositories/SpecificationsRepository';
 import { IBrandsRepository } from '../../modules/products/repositories/IBrandsRepository';
 import { BrandsRepository } from '../../modules/products/repositories/BrandsRepository';
+import { IUsersRepository } from '../../modules/users/repositories/IUsersRepository';
+import { UsersRepository } from '../../modules/users/repositories/UsersRepository';
 
 container.registerSingleton<IProductsRepository>('ProductsRepository', ProductsRepository);
 
 container.registerSingleton<ISpecificationsRepository>('SpecificationsRepository', SpecificationsRepository);
 
 container.registerSingleton<IBrandsRepository>('BrandsRepository', BrandsRepository);
+
+container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository);
