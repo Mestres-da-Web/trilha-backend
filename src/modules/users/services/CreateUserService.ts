@@ -4,6 +4,7 @@ import { inject, injectable } from 'tsyringe';
 import { AppError } from '../../../AppError';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 import { User } from '../model/User';
+import { IHashProviderDto } from '../../../shared/container/providers/HashProvider/model/IHashProvider';
 
 interface IRequest {
   name: string;
@@ -15,7 +16,11 @@ interface IRequest {
 class CreateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+
+    @inject('HashProvider')
+    private hashProvider: IHashProviderDto
+
   ) {}
 
   async execute({ name, email, password }: IRequest): Promise<User> {
@@ -26,7 +31,9 @@ class CreateUserService {
       throw new AppError('Email já esta sendo utilizado!', 403);
     }
 
-    const createdUser = this.usersRepository.create({ name, email, password  });
+    const hashPassword = await this.hashProvider.generateHash(password);
+
+    const createdUser = this.usersRepository.create({ name, email, password: hashPassword });
     const savedUser = await this.usersRepository.save(createdUser);
 
     return savedUser;

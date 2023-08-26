@@ -8,6 +8,8 @@ import { BrandsRepository } from '../../modules/products/repositories/BrandsRepo
 import { IUsersRepository } from '../../modules/users/repositories/IUsersRepository';
 import { UsersRepository } from '../../modules/users/repositories/UsersRepository';
 
+import './providers'
+
 container.registerSingleton<IProductsRepository>('ProductsRepository', ProductsRepository);
 
 container.registerSingleton<ISpecificationsRepository>('SpecificationsRepository', SpecificationsRepository);
