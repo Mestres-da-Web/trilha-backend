@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { BrandController } from '../controller/Brand.controller';
+import { verifyPermission } from '../../../shared/middleware/verifyPersmissions';
+import { UserRoles } from '../../users/model/User';
 
 
 
@@ -14,7 +16,7 @@ const brandController = new BrandController();
 */
 
 // create
-brandsRouter.post('/',brandController.create);
+brandsRouter.post('/', verifyPermission([UserRoles.master]), brandController.create);
 
 // get
 brandsRouter.get('/', brandController.list);
@@ -22,10 +24,10 @@ brandsRouter.get('/', brandController.list);
 brandsRouter.get('/:id', brandController.show);
 
 // delete
-brandsRouter.delete('/:id', brandController.delete);
+brandsRouter.delete('/:id', verifyPermission([UserRoles.master]), brandController.delete);
 
 // update
-brandsRouter.put('/:id', brandController.update);
+brandsRouter.put('/:id', verifyPermission([UserRoles.master]), brandController.update);
 
 
 

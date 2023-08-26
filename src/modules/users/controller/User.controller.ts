@@ -36,10 +36,12 @@ class UserController {
 
     async delete(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
+        const request_id  = request.user.id;
+        //const { id: request_id } = request.user;
 
         const deleteUserService = container.resolve(DeleteUserService);
 
-        await deleteUserService.execute({id});
+        await deleteUserService.execute({id, request_id});
 
 
         return response.status(200).send();

@@ -9,6 +9,7 @@ import { productsRouter } from './modules/products/routes/products.routes';
 import { specificationsRouter } from './modules/products/routes/specification.routes';
 import { brandsRouter } from './modules/products/routes/brand.routes';
 import { usersRouter } from './modules/users/routes/user.routes';
+import { sessionsRouter } from './modules/users/routes/session.routes';
 
 
 const app = express();
@@ -22,7 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/brands', brandsRouter);
 app.use('/specifications', specificationsRouter);
 app.use('/products', productsRouter);
-app.use('/users', usersRouter)
+app.use('/users', usersRouter);
+app.use('/session', sessionsRouter)
 
 
 app.get('/', (req, res) => {1

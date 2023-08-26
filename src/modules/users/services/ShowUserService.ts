@@ -20,7 +20,7 @@ class ShowUserService {
       id,
     });
     if(!userExists){
-      throw new AppError("Usuário não encontrada", 404);
+      throw new AppError("Usuário não encontrado", 404);
     }
     
     return userExists;

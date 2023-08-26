@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "./AppError";
 
+
 export function globalErrorHandler(error: any, request: Request, response: Response, _:NextFunction){
     if(error instanceof AppError){
         return response.status(error.statusCode).json({

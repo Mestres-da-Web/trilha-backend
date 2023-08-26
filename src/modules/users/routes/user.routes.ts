@@ -1,5 +1,8 @@
 import { Router } from 'express';
 import { UserController } from '../controller/User.controller';
+import { verifyPermission } from '../../../shared/middleware/verifyPersmissions';
+import { UserRoles } from '../model/User';
+import { ensureAuthorized } from '../../../shared/middleware/ensureAuthorized';
 
 
 
@@ -17,15 +20,15 @@ const userController = new UserController();
 usersRouter.post('/',userController.create);
 
 // get
-usersRouter.get('/', userController.list);
+usersRouter.get('/', verifyPermission([UserRoles.master]), userController.list);
 
-usersRouter.get('/:id', userController.show);
+usersRouter.get('/:id', verifyPermission([UserRoles.master]), userController.show);
 
 // delete
-usersRouter.delete('/:id', userController.delete);
+usersRouter.delete('/:id', ensureAuthorized, userController.delete);
 
 // update
-usersRouter.put('/:id', userController.update);
+usersRouter.put('/:id', ensureAuthorized, userController.update);
 
 
 
