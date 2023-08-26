@@ -22,19 +22,20 @@ class CreateProductService {
     @inject('SpecificationsRepository')
     private specificationsRepository: ISpecificationsRepository,
 
-    //@inject('BrandsRepository')
-    //private brandsRepository: IBrandsRepository,
-    //rivate specificationsRepository: ISpecificationsRepository
+    @inject('BrandsRepository')
+    private brandsRepository: IBrandsRepository,
     ) {}
 
   async execute({ name, brand_id, specification_id }: IRequest): Promise<Product> {
-    // const brand = this.brandsRepository.findById(brand_id);
+    const brand = this.brandsRepository.findBy({
+      id: brand_id
+    });
 
-    // if(!brand){
-    //   throw new AppError("Marca não encontrado", 404);
-    // }
+    if(!brand){
+      throw new AppError("Marca não encontrado", 404);
+    }
 
-    // let specification: Specification | undefined = undefined;
+    let specification: Specification | undefined = undefined;
     
     if(specification_id){
       const specification = await this.specificationsRepository.findBy({
@@ -42,15 +43,11 @@ class CreateProductService {
       });
 
       if(!specification){
-        throw new AppError("Especificação não encontrada ", 404)
+        throw new AppError("Especificação não encontrada ", 404)  
       }
     }
 
-    // const productAlreadyExists = this.productsRepository.findByName(name);
-    // if (productAlreadyExists) {
-    //   throw new AppError('Produto já existe!', 403);
-    // }
-    const product = this.productsRepository.create({ name, specification_id });
+    const product = this.productsRepository.create({ name, specification_id, brand_id });
     const savedProduct = this.productsRepository.save(product);
 
     return savedProduct;

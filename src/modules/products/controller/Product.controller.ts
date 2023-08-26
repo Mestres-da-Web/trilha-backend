@@ -23,10 +23,13 @@ class ProductController {
     }
 
     async list(request: Request, response: Response): Promise<Response> {
-        const { page, limit } = request.query;
+        const { page, limit, brand_id } = request.query;
+        console.log("brand_id",brand_id)
 
         const indexProductService = container.resolve(IndexProductService);
-        const products = await indexProductService.execute({page: Number(page), limit: Number(limit)});
+        const products = await indexProductService.execute({page: Number(page), limit: Number(limit), filters: {
+            brand_id: brand_id as string,
+        }});
         return response.status(200).send(products);
     }
 

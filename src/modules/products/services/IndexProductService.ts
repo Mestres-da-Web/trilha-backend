@@ -13,10 +13,8 @@ class IndexProductService {
     ) {}
 
   async execute(paginatedRequest: IPaginatedRequest<Product>): Promise<IPaginatedResponse<Product>> {
-
     const products = await this.productsRepository.list({
-      limit: paginatedRequest.limit,
-      page: paginatedRequest.page
+      ...paginatedRequest
     });
 
     return products;

@@ -50,10 +50,11 @@ class UserController {
     async update(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
         const { name, email, password } = request.body;
+        const request_id = request.user.id;
 
         const updateUserService = container.resolve(UpdateUserService);
 
-        const user = await updateUserService.execute({id, name, email, password });
+        const user = await updateUserService.execute({id, name, email, password, request_id });
 
 
         return response.status(200).send(user);

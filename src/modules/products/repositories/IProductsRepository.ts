@@ -6,12 +6,12 @@ import { Product } from "../model/Product";
 
 interface ICreateProductDto {
   name: string;
-  //brand: Brand;
+  brand_id: string;
   specification_id?: string;
 }
 
 interface IProductsRepository {
-  create({ name, specification_id }: ICreateProductDto): Product;
+  create({ name, specification_id, brand_id }: ICreateProductDto): Product;
   save(product: Product): Promise<Product>;
   // update(product: Product): Promise<Product>;
   list(paginatedRequest:  IPaginatedRequest<Product>): Promise<IPaginatedResponse<Product>>;

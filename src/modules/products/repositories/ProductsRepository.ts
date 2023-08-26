@@ -26,13 +26,21 @@ class ProductsRepository implements IProductsRepository {
   async list({
     limit = 50,
     page = 1,
+    filters = {},
   }: IPaginatedRequest<Product>): Promise<IPaginatedResponse<Product>> {
-    
-    const [products, total] = await this.ormRepository.findAndCount({
-      skip: (page - 1)*limit,
-      take: limit,
-      relations: []
-    })
+    const query = this.ormRepository.createQueryBuilder('products')
+    .leftJoinAndSelect('products.brand', 'brand')
+    .leftJoinAndSelect('products.specification', 'specification')
+    .skip((page - 1) * limit)
+    .take(limit);
+
+    if(filters.brand_id){
+      query.where('brand.id = :brand_id',{
+        brand_id: filters.brand_id
+      })
+    }
+
+    const [products, total] = await query.getManyAndCount();
 
     return {
       results: products,
