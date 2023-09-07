@@ -10,6 +10,7 @@ import { specificationsRouter } from './modules/products/routes/specification.ro
 import { brandsRouter } from './modules/products/routes/brand.routes';
 import { usersRouter } from './modules/users/routes/user.routes';
 import { sessionsRouter } from './modules/users/routes/session.routes';
+import { cartRouter } from './modules/carts/routers/cart.routes';
 
 
 const app = express();
@@ -24,7 +25,8 @@ app.use('/brands', brandsRouter);
 app.use('/specifications', specificationsRouter);
 app.use('/products', productsRouter);
 app.use('/users', usersRouter);
-app.use('/session', sessionsRouter)
+app.use('/session', sessionsRouter);
+app.use('/cart', cartRouter);
 
 
 app.get('/', (req, res) => {1

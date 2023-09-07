@@ -9,6 +9,10 @@ import { IUsersRepository } from '../../modules/users/repositories/IUsersReposit
 import { UsersRepository } from '../../modules/users/repositories/UsersRepository';
 
 import './providers'
+import { ICartsRepository } from '../../modules/carts/repositories/ICartsRepository';
+import { CartsRepository } from '../../modules/carts/repositories/CartRepository';
+import { CartItemsRepository } from '../../modules/carts/repositories/CartItemsRepository';
+import { ICartItemsRepository } from '../../modules/carts/repositories/ICartItemsRepository';
 
 container.registerSingleton<IProductsRepository>('ProductsRepository', ProductsRepository);
 
@@ -17,3 +21,8 @@ container.registerSingleton<ISpecificationsRepository>('SpecificationsRepository
 container.registerSingleton<IBrandsRepository>('BrandsRepository', BrandsRepository);
 
 container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository);
+
+container.registerSingleton<ICartsRepository>('CartsRepository', CartsRepository);
+
+container.registerSingleton<ICartItemsRepository>('CartItemsRepository', CartItemsRepository);
+

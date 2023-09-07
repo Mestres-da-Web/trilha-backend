@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { Specification } from './Specification';
 import { Brand } from './Brand';
+import { Cart_item } from '../../carts/model/cart_item';
 
 @Entity("products")
 class Product {
@@ -14,6 +15,12 @@ class Product {
 
   @Column()
   brand_id: string;
+
+  @OneToMany(() => Cart_item, cart_items => cart_items.product)
+  @JoinColumn({
+    name: 'cart_id'
+  })
+  cart_items: Cart_item[];
   
   @ManyToOne(() => Brand)
   @JoinColumn({ name: 'brand_id' })
