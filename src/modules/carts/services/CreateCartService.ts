@@ -9,11 +9,12 @@ import { ICartItemsRepository } from '../repositories/ICartItemsRepository';
 
 interface ICreateCartItems{
     product_id: string,
-    quantity: number;
+    quantity?: number;
 }
 
 interface IRequest {
-    products: ICreateCartItems[];
+    products?: ICreateCartItems[];
+    request_id: string;
 }
 
 @injectable()
@@ -29,14 +30,16 @@ class CreateCartService {
     private cartItemsRepository: ICartItemsRepository,
   ) {}
 
-  async execute({ products: productsParams }: IRequest): Promise<Cart> {
+  async execute({  request_id, products: productsParams = [] }: IRequest): Promise<Cart> {
     const validProducts = await this.findValidProducts(productsParams);
-    const cart = this.cartsRepository.create({});
+    const cart = this.cartsRepository.create({
+      user_id: request_id,
+    });
     const cart_items = productsParams.map(productsParam =>{
         return this.cartItemsRepository.create({
             cart_id: cart.id,
             product_id: productsParam.product_id,
-            quantity: productsParam.quantity,
+            quantity: productsParam.quantity ? productsParam.quantity : 1,
         })
     });
 

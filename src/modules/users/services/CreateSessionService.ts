@@ -23,7 +23,7 @@ class CreateSessionService {
 
   async execute({ email, password }: IRequest): Promise<{
     user: User,
-    acessToken: string
+    access_token: string
   }> {
     const userExists = await this.usersRepository.findBy({
       email,
@@ -40,7 +40,7 @@ class CreateSessionService {
     
     return {
       user: userExists,
-      acessToken: token,
+      access_token: token,
     };
   }
 }

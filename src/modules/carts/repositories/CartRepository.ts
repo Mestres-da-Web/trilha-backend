@@ -11,17 +11,21 @@ class CartsRepository implements ICartsRepository {
     this.ormRepository = getRepository(Cart);
   }
 
-  create(): Cart {
-    return this.ormRepository.create({});
+  create({ user_id }: ICreateCartDto): Cart {
+    return this.ormRepository.create({
+      user_id: user_id,
+    });
   }
 
   async list({
     page = 1,
     limit = 50,
+    filters = {},
   }: IPaginatedRequest<Cart>): Promise<IPaginatedResponse<Cart>> {
     const [results, total] = await this.ormRepository.findAndCount({
       skip: (page - 1)*limit,
       take: limit,
+      where: filters,
     })
 
     return {

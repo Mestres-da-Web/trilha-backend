@@ -4,7 +4,7 @@ import { Cart } from '../model/cart';
 import { Cart_item } from '../model/cart_item';
 
 interface ICreateCartDto {
-
+  user_id: string;
 }
 
 // interface IUpdateCartDto extends ICreateCartDto {

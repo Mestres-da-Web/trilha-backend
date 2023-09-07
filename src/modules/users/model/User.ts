@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Cart } from '../../carts/model/cart';
 
 enum UserRoles {
   master = 'MASTER',
@@ -25,6 +26,11 @@ class User {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @OneToMany(() => Cart, cart => cart.user, {
+    onDelete: 'CASCADE'
+  })
+  carts: Cart[];
 
 }
 
