@@ -10,11 +10,16 @@ const cartController = new CartController();
 
 cartRouter.post('/',  verifyPermission([UserRoles.client]), cartController.create);
 
-// 
+
 cartRouter.get('/', verifyPermission([UserRoles.client]), cartController.list);
+
+cartRouter.get('/:id', verifyPermission([UserRoles.client]), cartController.show);
+
+cartRouter.delete('/:id',  verifyPermission([UserRoles.client]), cartController.delete);
+
 // 
 // cartRouter.put('/:id',  verifyPermission([UserRoles.master]), cartController.update);
 // 
-// cartRouter.delete('/:id',  verifyPermission([UserRoles.master]), cartController.delete);
+// 
 
 export { cartRouter };

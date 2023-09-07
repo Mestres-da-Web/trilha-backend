@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateCartService } from "../services/CreateCartService";
-import { IndexCartService } from "../services/IndexBrandService";
+import { IndexCartService } from "../services/IndexCartService";
+import { ShowCartService } from "../services/ShowCartService";
+import { DeleteCartService } from "../services/DeleteCartService copy";
 
 
 class CartController {
@@ -11,12 +13,12 @@ class CartController {
         
         const createCartService = container.resolve(CreateCartService);
 
-        const createddCart = await createCartService.execute({
+        const createdCart = await createCartService.execute({
             products: products,
             request_id: id,
         });
 
-        return response.status(200).send(createddCart);
+        return response.status(200).send(createdCart);
     }
 
     async list(request: Request, response: Response): Promise<Response> {
@@ -35,14 +37,42 @@ class CartController {
 
         return response.status(200).send(paginatedResponse);
     }
-// 
+
+    async show(request: Request, response: Response): Promise<Response> {
+
+        const { id } = request.params;
+
+        const showCartService = container.resolve(ShowCartService)
+
+        const paginatedResponse = await showCartService.execute({
+            id: id,
+            request_id: request.user.id,
+        });
+
+        return response.status(200).send(paginatedResponse);
+    }
+    
+    async delete(request: Request, response: Response): Promise<void> {
+        const { id } = request.params;
+
+        const deleteCartService = container.resolve(DeleteCartService);
+
+        await deleteCartService.execute({
+            id: id,
+            request_id: request.user.id,
+        });
+
+        response.status(200).send();
+
+    }
+
     // async update(request: Request, response: Response): Promise<Response> {
         // const { id } = request.params;
         // const { name, description } = request.body;
 // 
-        // const updatedCartService = container.resolve(UpdatedCartService);
+        // const updateCartService = container.resolve(UpdateCartService);
 // 
-        // const updated = await updatedCartService.execute({
+        // const updated = await updateCartService.execute({
             // description,
             // id,
             // name,
@@ -52,16 +82,7 @@ class CartController {
 // 
     // }
 // 
-    // async delete(request: Request, response: Response): Promise<void> {
-        // const { id } = request.params;
-// 
-        // const deletedCartService = container.resolve(DeletedCartService);
-// 
-        // await deletedCartService.execute({id});
-// 
-        // response.status(200).send();
-// 
-    // }
+
 }
 
 export { CartController };
