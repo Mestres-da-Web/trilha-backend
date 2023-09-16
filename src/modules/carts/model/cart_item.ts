@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { cart_status } from './dto/cart_status';
 import { Cart } from './cart';
 import { Product } from '../../products/model/Product';
 
@@ -26,7 +25,10 @@ class Cart_item {
   product_id: string;
 
 
-  @ManyToOne(() => Cart, cart => cart.cart_items )
+  @ManyToOne(() => Cart, cart => cart.cart_items,{
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({
     name: 'cart_id'
   })

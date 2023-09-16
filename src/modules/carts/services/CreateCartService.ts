@@ -1,24 +1,21 @@
 
-import { inject, injectable } from 'tsyringe';
+import { container, inject, injectable } from 'tsyringe';
 import { AppError } from '../../../AppError';
 import { ICartsRepository } from '../repositories/ICartsRepository';
 import { Cart } from '../model/cart'; 
 import { IProductsRepository } from '../../products/repositories/IProductsRepository';
 import { Product } from '../../products/model/Product';
 import { ICartItemsRepository } from '../repositories/ICartItemsRepository';
-
-interface ICreateCartItems{
-    product_id: string,
-    quantity?: number;
-}
+import { ValidProductsService } from '../../products/services/ValidProductsServices';
 
 interface IRequest {
-    products?: ICreateCartItems[];
+    products?: IProductQuantity[];
     request_id: string;
 }
 
 @injectable()
 class CreateCartService {
+  validProductsService: ValidProductsService;
   constructor(
     @inject('CartsRepository')
     private cartsRepository: ICartsRepository,
@@ -28,10 +25,12 @@ class CreateCartService {
 
     @inject('CartItemsRepository')
     private cartItemsRepository: ICartItemsRepository,
-  ) {}
+  ) {
+    this.validProductsService = container.resolve(ValidProductsService);
+  }
 
   async execute({  request_id, products: productsParams = [] }: IRequest): Promise<Cart> {
-    const validProducts = await this.findValidProducts(productsParams);
+    const validProducts = await this.validProductsService.execute(productsParams);
     const cart = this.cartsRepository.create({
       user_id: request_id,
     });
@@ -49,26 +48,6 @@ class CreateCartService {
 
 
     return savedCart;
-  }
-
-
-
-
-
-
-
-  
-
-   async findValidProducts(products: ICreateCartItems[]): Promise<Product[]>{
-    return Promise.all(
-        products.map(async products =>{
-            const foundProduct = await this.productsRepository.findById(products.product_id);
-            if(!foundProduct){
-                throw new AppError('Um dos produtos não foram encontrados', 404);
-            }
-            return foundProduct;
-        }),
-    )
   }
 }
 

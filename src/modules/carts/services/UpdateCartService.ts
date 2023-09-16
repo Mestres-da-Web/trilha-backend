@@ -1,56 +1,67 @@
 
-import { inject, injectable } from 'tsyringe';
+import { container, inject, injectable } from 'tsyringe';
 import { AppError } from '../../../AppError';
 import { ICartsRepository } from '../repositories/ICartsRepository';
 import { Cart } from '../model/cart'; 
 import { IProductsRepository } from '../../products/repositories/IProductsRepository';
 import { Product } from '../../products/model/Product';
+import { ValidProductsService } from '../../products/services/ValidProductsServices';
+import { ICartItemsRepository } from '../repositories/ICartItemsRepository';
+
+
 
 interface IRequest {
-    id: string;
-    product_ids: string[]
+  id: string;
+  products?: IProductQuantity[];
+  request_id: string;
 }
 
 @injectable()
-class CreateCartService {
+class UpdateCartService {
+  validProductsService: ValidProductsService;
   constructor(
     @inject('CartsRepository')
     private cartsRepository: ICartsRepository,
 
+    @inject('CartItemsRepository')
+    private cartItemsRepository: ICartItemsRepository,
+
     @inject('ProductsRepository')
     private productsRepository: IProductsRepository,
-  ) {}
-
-  async execute({ product_ids }: IRequest): Promise<Cart> {
-    const products = await this.findValidProducts(product_ids);
-    const cart = this.cartsRepository.create({});
-
-    cart.cart_items
-
-
-
-    //return savedCart;
+  ) {
+    this.validProductsService = container.resolve(ValidProductsService);
   }
 
+  async execute({ id, products = [], request_id }: IRequest): Promise<Cart> {
+    const validProducts = await this.validProductsService.execute(products);
 
+    const cart = await this.cartsRepository.findBy({
+      id: id,
+      user_id: request_id,
+    })
 
+    if(!cart){
+      throw new AppError("Carrinho não encontrado", 404);
+    }
 
-
-
-
-  
-
-   async findValidProducts(product_ids: string[]): Promise<Product[]>{
-    return Promise.all(
-        product_ids.map(async product_id =>{
-            const foundProduct = await this.productsRepository.findById(product_id);
-            if(!foundProduct){
-                throw new AppError('Um dos produtos não foram encontrados', 404);
-            }
-            return foundProduct;
-        }),
+    await Promise.all(
+      cart.cart_items.map(async item =>{
+        return await this.cartItemsRepository.delete(item.id);
+      })
     )
+
+    cart.cart_items = products.map(prd => {
+      return this.cartItemsRepository.create({
+        cart_id: cart.id,
+        product_id: prd.product_id,
+        quantity: prd.quantity? prd.quantity : 1,
+      })
+    });
+
+    const savedCart = await this.cartsRepository.save(cart)
+
+    return savedCart;
   }
 }
 
-export { CreateCartService };
+export { UpdateCartService };

@@ -17,9 +17,9 @@ cartRouter.get('/:id', verifyPermission([UserRoles.client]), cartController.show
 
 cartRouter.delete('/:id',  verifyPermission([UserRoles.client]), cartController.delete);
 
-// 
-// cartRouter.put('/:id',  verifyPermission([UserRoles.master]), cartController.update);
-// 
-// 
+
+cartRouter.put('/:id',  verifyPermission([UserRoles.client]), cartController.update);
+
+
 
 export { cartRouter };

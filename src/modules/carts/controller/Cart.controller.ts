@@ -4,6 +4,7 @@ import { CreateCartService } from "../services/CreateCartService";
 import { IndexCartService } from "../services/IndexCartService";
 import { ShowCartService } from "../services/ShowCartService";
 import { DeleteCartService } from "../services/DeleteCartService copy";
+import { UpdateCartService } from "../services/UpdateCartService";
 
 
 class CartController {
@@ -66,22 +67,22 @@ class CartController {
 
     }
 
-    // async update(request: Request, response: Response): Promise<Response> {
-        // const { id } = request.params;
-        // const { name, description } = request.body;
-// 
-        // const updateCartService = container.resolve(UpdateCartService);
-// 
-        // const updated = await updateCartService.execute({
-            // description,
-            // id,
-            // name,
-        // })
-// 
-        // return response.status(200).send(updated);
-// 
-    // }
-// 
+    async update(request: Request, response: Response): Promise<Response> {
+        const { id } = request.params;
+        const { products } = request.body;
+
+        const updateCartService = container.resolve(UpdateCartService);
+
+        const updated = await updateCartService.execute({
+            id: id,
+            request_id: request.user.id,
+            products: products,
+        })
+
+        return response.status(200).send(updated);
+
+    }
+
 
 }
 

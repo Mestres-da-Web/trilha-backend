@@ -13,6 +13,8 @@ import { ICartsRepository } from '../../modules/carts/repositories/ICartsReposit
 import { CartsRepository } from '../../modules/carts/repositories/CartRepository';
 import { CartItemsRepository } from '../../modules/carts/repositories/CartItemsRepository';
 import { ICartItemsRepository } from '../../modules/carts/repositories/ICartItemsRepository';
+import { IAddressesRepository } from '../../modules/address/repositories/IAddressesRepository';
+import { AddressesRepository } from '../../modules/address/repositories/AddressesRepository';
 
 container.registerSingleton<IProductsRepository>('ProductsRepository', ProductsRepository);
 
@@ -25,4 +27,6 @@ container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository
 container.registerSingleton<ICartsRepository>('CartsRepository', CartsRepository);
 
 container.registerSingleton<ICartItemsRepository>('CartItemsRepository', CartItemsRepository);
+
+container.registerSingleton<IAddressesRepository>('AddressesRepository', AddressesRepository);
 

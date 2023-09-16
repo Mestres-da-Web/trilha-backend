@@ -1,4 +1,4 @@
-export enum cart_status {
+export enum OrderStatus {
     PAID = 'PAID',
     PROCESSING = 'PROCESSING',
     CANCELLED = 'CANCELLED'

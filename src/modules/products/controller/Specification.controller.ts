@@ -6,6 +6,8 @@ import { DeleteSpecificationService } from "../services/DeleteSpecificationServi
 import { UpdateSpecificationService } from "../services/UpdateSecificationService";
 
 class SpecificationController {
+    // TODO: SHOW
+
     async create(request: Request, response: Response): Promise<Response> {
         const { name, description } = request.body;
         

@@ -37,7 +37,10 @@ class CartsRepository implements ICartsRepository {
   }
 
   async findBy(filters: Partial<Cart>): Promise<Cart | undefined> {
-    return await this.ormRepository.findOne(filters)
+    return await this.ormRepository.findOne({
+      where: filters,
+      relations: ['cart_items']
+    })
   }
 
   async delete(id: string): Promise<void> {

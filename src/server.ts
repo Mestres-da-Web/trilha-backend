@@ -11,6 +11,7 @@ import { brandsRouter } from './modules/products/routes/brand.routes';
 import { usersRouter } from './modules/users/routes/user.routes';
 import { sessionsRouter } from './modules/users/routes/session.routes';
 import { cartRouter } from './modules/carts/routers/cart.routes';
+import { addressesRouter } from './modules/address/routes/address.routes';
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.use('/products', productsRouter);
 app.use('/users', usersRouter);
 app.use('/session', sessionsRouter);
 app.use('/cart', cartRouter);
+app.use('/address', addressesRouter);
 
 
 app.get('/', (req, res) => {1
