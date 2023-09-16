@@ -32,7 +32,10 @@ class Cart {
   @JoinColumn({
     name: "order_id"
   })
-  order: Order
+  order?: Order;
+
+  @Column()
+  order_id: string;
 
   @Column()
   user_id: string;

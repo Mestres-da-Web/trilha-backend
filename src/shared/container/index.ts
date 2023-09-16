@@ -15,6 +15,9 @@ import { CartItemsRepository } from '../../modules/carts/repositories/CartItemsR
 import { ICartItemsRepository } from '../../modules/carts/repositories/ICartItemsRepository';
 import { IAddressesRepository } from '../../modules/address/repositories/IAddressesRepository';
 import { AddressesRepository } from '../../modules/address/repositories/AddressesRepository';
+import { IOrdersRepository } from '../../modules/order/repositories/IOrdersRepository';
+import { OrdersRepository } from '../../modules/order/repositories/OrderRepository';
+
 
 container.registerSingleton<IProductsRepository>('ProductsRepository', ProductsRepository);
 
@@ -29,4 +32,6 @@ container.registerSingleton<ICartsRepository>('CartsRepository', CartsRepository
 container.registerSingleton<ICartItemsRepository>('CartItemsRepository', CartItemsRepository);
 
 container.registerSingleton<IAddressesRepository>('AddressesRepository', AddressesRepository);
+
+container.registerSingleton<IOrdersRepository>('OrdersRepository', OrdersRepository);
 

@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { UserController } from '../controller/User.controller';
+import { OrderController } from '../controller/Order.controller';
 import { verifyPermission } from '../../../shared/middleware/verifyPersmissions';
-import { UserRoles } from '../model/User';
 import { ensureAuthorized } from '../../../shared/middleware/ensureAuthorized';
+import { UserRoles } from '../../users/model/User';
 
 
 
-const usersRouter = Router();
+const ordersRouter = Router();
 
-const userController = new UserController();
+const orderController = new OrderController();
 /*
 * C - create - criar     - post
 * R - read   - ler       - get
@@ -17,19 +17,10 @@ const userController = new UserController();
 */
 
 // create
-usersRouter.post('/',userController.create);
-
-// get
-usersRouter.get('/', verifyPermission([UserRoles.master]), userController.list);
-
-usersRouter.get('/:id', verifyPermission([UserRoles.master]), userController.show);
-
-// delete
-usersRouter.delete('/:id', ensureAuthorized, userController.delete);
-
-// update
-usersRouter.put('/:id', ensureAuthorized, userController.update);
+ordersRouter.post('/', verifyPermission([UserRoles.client]), orderController.create);
 
 
 
-export { usersRouter };
+
+
+export { ordersRouter };

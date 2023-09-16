@@ -12,6 +12,7 @@ import { usersRouter } from './modules/users/routes/user.routes';
 import { sessionsRouter } from './modules/users/routes/session.routes';
 import { cartRouter } from './modules/carts/routers/cart.routes';
 import { addressesRouter } from './modules/address/routes/address.routes';
+import { ordersRouter } from './modules/order/routes/user.routes';
 
 
 const app = express();
@@ -29,6 +30,7 @@ app.use('/users', usersRouter);
 app.use('/session', sessionsRouter);
 app.use('/cart', cartRouter);
 app.use('/address', addressesRouter);
+app.use('/order', ordersRouter);
 
 
 app.get('/', (req, res) => {1

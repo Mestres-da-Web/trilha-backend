@@ -1,24 +1,26 @@
 import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
-import { User } from '../model/User';
-import { IUsersRepository, ICreateUserDto } from './IUsersRepository';
+import { Order } from '../model/Order';
+import { IOrdersRepository, ICreateOrderDto } from './IOrdersRepository';
 import { Repository, getRepository } from 'typeorm'
 
-class UsersRepository implements IUsersRepository {
-  private ormRepository: Repository<User>;
+class OrdersRepository implements IOrdersRepository {
+  private ormRepository: Repository<Order>;
 
   constructor() {
-    this.ormRepository = getRepository(User);
+    this.ormRepository = getRepository(Order);
   }
 
-  create({ name, email, password }: ICreateUserDto): User {
-    return this.ormRepository.create({name, email, password });
+  create({ ...data }: ICreateOrderDto): Order {
+    return this.ormRepository.create({
+      ...data
+     });
   }
 
   async list({
     page = 1,
     limit = 50,
-  }: IPaginatedRequest<User>): Promise<IPaginatedResponse<User>> {
+  }: IPaginatedRequest<Order>): Promise<IPaginatedResponse<Order>> {
     const [results, total] = await this.ormRepository.findAndCount({
       skip: (page - 1)*limit,
       take: limit,
@@ -32,7 +34,7 @@ class UsersRepository implements IUsersRepository {
     }
   }
 
-  async findBy(filters: Partial<User>): Promise<User | undefined> {
+  async findBy(filters: Partial<Order>): Promise<Order | undefined> {
     return await this.ormRepository.findOne(filters)
   }
 
@@ -40,10 +42,10 @@ class UsersRepository implements IUsersRepository {
     await this.ormRepository.delete(id);
   }
 
-  async save(user: User): Promise<User> {
-    return await this.ormRepository.save(user);
+  async save(order: Order): Promise<Order> {
+    return await this.ormRepository.save(order);
   }
   
 }
 
-export { UsersRepository };
+export { OrdersRepository };

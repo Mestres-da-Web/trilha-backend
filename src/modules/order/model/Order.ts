@@ -34,6 +34,9 @@ class Order {
   })
   cart: Cart
 
+  @Column()
+  cart_id: string;
+
   @ManyToOne(() => Address, address => address.order, {
     onDelete: 'CASCADE'
   })
@@ -42,7 +45,8 @@ class Order {
   })
   address: Address
 
-  
+  @Column()
+  address_id: string;
 
 }
 
