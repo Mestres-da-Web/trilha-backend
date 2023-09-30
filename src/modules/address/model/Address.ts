@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../../users/model/User';
 import { Order } from '../../order/model/Order';

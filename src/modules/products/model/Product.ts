@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
 import { Specification } from './Specification';
 import { Brand } from './Brand';

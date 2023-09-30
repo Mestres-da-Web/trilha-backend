@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from '../../users/model/User';
 import { Cart } from '../../carts/model/cart';
