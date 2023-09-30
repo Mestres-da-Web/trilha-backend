@@ -16,11 +16,23 @@ class Product {
   @Column()
   brand_id: string;
 
+  @Column({
+    default: 0
+  })
+  stock: number;
+
   @OneToMany(() => Cart_item, cart_items => cart_items.product)
   @JoinColumn({
     name: 'cart_id'
   })
   cart_items: Cart_item[];
+
+  @Column({
+    default: '{}',
+    array: true,
+    type: "varchar"
+  })
+  images: string[];
   
   @ManyToOne(() => Brand)
   @JoinColumn({ name: 'brand_id' })

@@ -26,7 +26,6 @@ class Cart {
   user: User;
 
   @OneToOne(() => Order, order => order.cart, {
-    onDelete: 'CASCADE',
     nullable: true
   })
   @JoinColumn({
@@ -34,7 +33,9 @@ class Cart {
   })
   order?: Order;
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   order_id: string;
 
   @Column()

@@ -9,14 +9,15 @@ import { ShowProductService } from "../services/ShowProductService";
 
 class ProductController {
     async create(request: Request, response: Response): Promise<Response> {
-        const { name } = request.body;
-        const { brand_id, specification_id } = request.body;
+        const { name, brand_id, stock, specification_id } = request.body;
 
+        const files = request.files as Express.Multer.File[];
 
+        const filenames = files.map(file => file.filename);
 
         const createProductService = container.resolve(CreateProductService);
 
-        const product = await createProductService.execute({name, brand_id, specification_id});
+        const product = await createProductService.execute({name, brand_id, specification_id, stock, filenames});
 
         return response.status(200).send(product);
 
@@ -45,21 +46,21 @@ class ProductController {
         return response.status(200).send();
     }
 
-    update(request: Request, response: Response): Response {
+    async update(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
-        const { name } = request.body;
-        // const { brand_id } = request.body;
+        const { name, brand_id, stock } = request.body;
 
         const updateProductService = container.resolve(UpdateProductService);
 
-        updateProductService.execute({
+        const product = await updateProductService.execute({
             id,
             name,
-
+            brand_id,
+            stock,
         })
 
 
-        return response.status(200).send();
+        return response.status(200).json(product);
     }
 
     async show(request: Request, response: Response): Promise<Response> {

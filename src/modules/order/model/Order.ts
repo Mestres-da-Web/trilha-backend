@@ -27,7 +27,8 @@ class Order {
   user: User;
 
   @OneToOne(() => Cart, cart => cart.order, {
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    onUpdate: "CASCADE"
   })
   @JoinColumn({
     name: "cart_id"
@@ -38,7 +39,8 @@ class Order {
   cart_id: string;
 
   @ManyToOne(() => Address, address => address.order, {
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    onUpdate: "CASCADE"
   })
   @JoinColumn({
     name: "address_id"

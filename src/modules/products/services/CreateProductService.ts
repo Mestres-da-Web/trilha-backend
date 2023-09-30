@@ -1,5 +1,6 @@
 
 import { AppError } from '../../../AppError';
+import { IStorageProviderDto } from '../../../shared/container/providers/StorageProvider/model/IStorageProvider';
 import { Product } from '../model/Product';
 import { Specification } from '../model/Specification';
 import { IBrandsRepository } from '../repositories/IBrandsRepository';
@@ -10,7 +11,9 @@ import {inject, injectable} from 'tsyringe'
 interface IRequest {
   name: string;
   brand_id: string;
+  stock?: number;
   specification_id?: string;
+  filenames?: string[];
 }
 
 @injectable()
@@ -24,9 +27,12 @@ class CreateProductService {
 
     @inject('BrandsRepository')
     private brandsRepository: IBrandsRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProviderDto,
     ) {}
 
-  async execute({ name, brand_id, specification_id }: IRequest): Promise<Product> {
+  async execute({ name, brand_id, specification_id, filenames, stock }: IRequest): Promise<Product> {
     const brand = this.brandsRepository.findBy({
       id: brand_id
     });
@@ -47,7 +53,17 @@ class CreateProductService {
       }
     }
 
-    const product = this.productsRepository.create({ name, specification_id, brand_id });
+    const product = this.productsRepository.create({ name, specification_id, brand_id, stock });
+    if(filenames){
+      const savedFileNames = await Promise.all(
+        filenames.map(file => {
+          return this.storageProvider.saveFile(file);
+        }),
+      )
+
+      product.images = savedFileNames;
+    }
+
     const savedProduct = this.productsRepository.save(product);
 
     return savedProduct;

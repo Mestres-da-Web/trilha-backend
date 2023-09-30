@@ -7,6 +7,7 @@ import { Product } from "../model/Product";
 interface ICreateProductDto {
   name: string;
   brand_id: string;
+  stock: number;
   specification_id?: string;
 }
 

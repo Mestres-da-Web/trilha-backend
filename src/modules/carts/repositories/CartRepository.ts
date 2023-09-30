@@ -26,6 +26,7 @@ class CartsRepository implements ICartsRepository {
       skip: (page - 1)*limit,
       take: limit,
       where: filters,
+      relations: ['cart_items', 'cart_items.product']
     })
 
     return {
@@ -39,7 +40,7 @@ class CartsRepository implements ICartsRepository {
   async findBy(filters: Partial<Cart>): Promise<Cart | undefined> {
     return await this.ormRepository.findOne({
       where: filters,
-      relations: ['cart_items']
+      relations: ['cart_items', 'cart_items.product']
     })
   }
 
