@@ -8,10 +8,10 @@ module.exports = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  migrations: [`./src/shared/database/migrations/*{.js,.ts}`],
-  entities: [`./src/modules/**/model/*{.js,.ts}`],
-  seeds: [`./src/shared/database/seeds/*{.js,.ts}`],
+  migrations: [`./${path}/shared/database/migrations/*{.js,.ts}`],
+  entities: [`./${path}/modules/**/model/*{.js,.ts}`],
+  seeds: [`./${path}/shared/database/seeds/*{.js,.ts}`],
   cli: {
-    migrationsDir: `./src/shared/database/migrations`,
+    migrationsDir: `./${path}/shared/database/migrations`,
   },
 };
