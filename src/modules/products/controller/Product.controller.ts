@@ -17,7 +17,7 @@ class ProductController {
 
         const createProductService = container.resolve(CreateProductService);
 
-        const product = await createProductService.execute({name, brand_id, specification_id, filenames});
+        const product = await createProductService.execute({name, brand_id, specification_id, stock, filenames});
 
         return response.status(200).send(product);
 
@@ -50,6 +50,9 @@ class ProductController {
         const { id } = request.params;
         const { name, brand_id, stock } = request.body;
 
+        const files = request.files as Express.Multer.File[];
+        const filenames = files.map(file => file.filename)
+
         const updateProductService = container.resolve(UpdateProductService);
 
         const product = await updateProductService.execute({
@@ -57,6 +60,7 @@ class ProductController {
             name,
             brand_id,
             stock,
+            filenames,
         })
 
 

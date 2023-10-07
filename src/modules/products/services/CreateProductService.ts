@@ -14,6 +14,7 @@ interface IRequest {
   brand_id: string;
   specification_id?: string;
   filenames?: string[];
+  stock?: number;
 }
 
 @injectable()

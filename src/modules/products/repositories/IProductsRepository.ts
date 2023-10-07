@@ -9,6 +9,7 @@ interface ICreateProductDto {
   brand_id: string;
   specification_id?: string;
   images?: string[];
+  stock?: number;
 }
 
 interface IProductsRepository {

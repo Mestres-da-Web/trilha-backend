@@ -25,7 +25,7 @@ productsRouter.get('/:id', showProductMiddleware, productController.show);
 
 productsRouter.delete('/:id',deleteProductMiddleware, verifyPermission([UserRoles.master]), productController.delete);
 
-productsRouter.put('/:id', updateProductMiddleware, verifyPermission([UserRoles.master]), productController.update);
+productsRouter.put('/:id', uploadMulter.array('images'), updateProductMiddleware, verifyPermission([UserRoles.master]), productController.update);
 
 
 

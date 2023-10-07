@@ -28,6 +28,6 @@ export class StorageProvider implements IStorageProviderDto {
             return;
         }
 
-        await fs.promises.unlink(file)
+        await fs.promises.unlink(filePath)
     }
 }
