@@ -4,7 +4,7 @@ import './shared/container'
 import express, { json } from 'express';
 import 'express-async-errors';
 
-import { globalErrorHandler } from './globalErrorHandler';
+import { globalErrorHandler } from './shared/erros/globalErrorHandler';
 import { productsRouter } from './modules/products/routes/products.routes';
 import { specificationsRouter } from './modules/products/routes/specification.routes';
 import { brandsRouter } from './modules/products/routes/brand.routes';
@@ -14,7 +14,7 @@ import { cartRouter } from './modules/carts/routers/cart.routes';
 import { addressesRouter } from './modules/address/routes/address.routes';
 import { ordersRouter } from './modules/order/routes/user.routes';
 import { uploadConfig } from './config/upload';
-import { AppError } from './AppError';
+import { AppError } from './shared/erros/AppError';
 
 
 const app = express();

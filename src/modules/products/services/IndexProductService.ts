@@ -2,8 +2,8 @@
 import { inject, injectable } from 'tsyringe';
 import { Product } from '../model/Product';
 import { IProductsRepository } from '../repositories/IProductsRepository';
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import {instanceToInstance} from 'class-transformer'
 
 @injectable()

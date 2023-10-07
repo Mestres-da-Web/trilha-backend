@@ -2,8 +2,8 @@
 import { inject, injectable } from 'tsyringe';
 import { Cart } from '../model/cart';
 import { ICartsRepository } from '../repositories/ICartsRepository';
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 
 @injectable()
 class IndexCartService {

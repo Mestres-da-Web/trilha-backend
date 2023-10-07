@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { AppError } from '../../../AppError';
+import { AppError } from '@shared/erros/AppError';
 import { IUsersRepository } from '../repositories/IUsersRepository';
 import { UserRoles } from '../model/User';
 

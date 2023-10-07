@@ -1,5 +1,5 @@
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import { Specification } from '../model/Specification';
 
 interface ICreateSpecificationDto {

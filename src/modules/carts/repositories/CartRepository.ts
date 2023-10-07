@@ -1,5 +1,5 @@
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import { Cart } from '../model/cart';
 import { ICartsRepository, ICreateCartDto } from './ICartsRepository';
 import { Repository, getRepository } from 'typeorm'

@@ -2,8 +2,8 @@
 import { inject, injectable } from 'tsyringe';
 import { User } from '../model/User';
 import { IUsersRepository } from '../repositories/IUsersRepository';
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 
 @injectable()
 class IndexUserService {

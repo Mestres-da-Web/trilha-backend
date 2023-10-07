@@ -1,5 +1,5 @@
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import { Cart_item } from '../model/cart_item';
 import { ICartItemsRepository, ICreateCartItemDto } from '../repositories/ICartItemsRepository'
 

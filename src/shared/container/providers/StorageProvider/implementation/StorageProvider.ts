@@ -1,7 +1,7 @@
 import { IStorageProviderDto } from "../model/IStorageProvider";
 import fs from 'fs';
 import path from 'path'
-import { AppError } from "../../../../../AppError";
+import { AppError } from "../../../../erros/AppError";
 import { uploadConfig } from "../../../../../config/upload";
 
 export class StorageProvider implements IStorageProviderDto {

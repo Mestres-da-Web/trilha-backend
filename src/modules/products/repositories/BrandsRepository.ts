@@ -1,5 +1,5 @@
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import { Brand } from '../model/Brand';
 import { IBrandsRepository, ICreateBrandDto } from './IBrandsRepository';
 import { Repository, getRepository } from 'typeorm'

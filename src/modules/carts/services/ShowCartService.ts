@@ -2,9 +2,9 @@
 import { inject, injectable } from 'tsyringe';
 import { Cart } from '../model/cart';
 import { ICartsRepository } from '../repositories/ICartsRepository';
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
-import { AppError } from '../../../AppError';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
+import { AppError } from '@shared/erros/AppError';
 
 interface IRequest {
   request_id: string;

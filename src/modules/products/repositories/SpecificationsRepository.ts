@@ -4,8 +4,8 @@ import {
   ICreateSpecificationDto,
   ISpecificationsRepository,
 } from './ISpecificationsRepository';
-import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
-import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
+import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 
 class SpecificationsRepository implements ISpecificationsRepository {
   private ormRepository: Repository<Specification>;

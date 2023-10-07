@@ -1,5 +1,5 @@
 
-import { AppError } from '../../../AppError';
+import { AppError } from '@shared/erros/AppError';
 import { IStorageProviderDto } from '../../../shared/container/providers/StorageProvider/model/IStorageProvider';
 import { Product } from '../model/Product';
 import { Specification } from '../model/Specification';

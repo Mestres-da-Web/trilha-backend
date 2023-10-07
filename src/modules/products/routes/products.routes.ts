@@ -5,8 +5,8 @@ import { ensureAuthorized } from '../../../shared/middleware/ensureAuthorized';
 import { UserRoles } from '../../users/model/User';
 import { verifyPermission } from '../../../shared/middleware/verifyPersmissions';
 import multer from 'multer';
-import { uploadConfig } from '../../../config/upload';
 import { createProductMiddleware, deleteProductMiddleware, indexProductMiddleware, showProductMiddleware, updateProductMiddleware } from './validator/products.validation';
+import { uploadConfig } from '@config/upload';
 
 
 const uploadMulter = multer(uploadConfig.multer)

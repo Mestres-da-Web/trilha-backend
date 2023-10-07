@@ -1,6 +1,6 @@
 
 import { inject, injectable } from 'tsyringe';
-import { AppError } from '../../../AppError';
+import { AppError } from '@shared/erros/AppError';
 import { ICartsRepository } from '../../carts/repositories/ICartsRepository';
 import { Cart } from '../../carts/model/cart'; 
 import { IProductsRepository } from '../repositories/IProductsRepository';

@@ -1,5 +1,5 @@
-import { IPaginatedRequest } from "../../../shared/interfaces/IPaginatedRequest";
-import { IPaginatedResponse } from "../../../shared/interfaces/IPaginatedResponse";
+import { IPaginatedRequest } from "@shared/interfaces/IPaginatedRequest";
+import { IPaginatedResponse } from "@shared/interfaces/IPaginatedResponse";
 import { Product } from "../model/Product";
 import { IProductsRepository, ICreateProductDto } from "./IProductsRepository";
 import { getRepository, Repository } from "typeorm";

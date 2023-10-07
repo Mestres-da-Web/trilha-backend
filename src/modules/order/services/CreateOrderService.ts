@@ -1,7 +1,7 @@
 
 
 import { inject, injectable } from 'tsyringe';
-import { AppError } from '../../../AppError';
+import { AppError } from '@shared/erros/AppError';
 import { IHashProviderDto } from '../../../shared/container/providers/HashProvider/model/IHashProvider';
 import { Order } from '../model/Order';
 import { IOrdersRepository } from '../repositories/IOrdersRepository';

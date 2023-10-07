@@ -4,19 +4,20 @@ module.exports = {
       '@babel/preset-typescript',
     ],
     plugins: [
-      'module-resolver',
+      [
+        'module-resolver',
+        {
+          alias: {
+            '@config': './src/config',
+            '@modules': './src/modules',
+            '@shared': './src/shared',
+            '@error': './src/shared/errors',
+            '@server': './src/shared/server',
+          },
+        },
+      ],
       'babel-plugin-transform-typescript-metadata',
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties', { loose: true }],
     ],
 };
-
-/*
-yarn add @babel/cli -D
-yarn add @babel/core -D
-yarn add @babel/preset-typescript -D
-yarn add babel-plugin-transform-typescript-metadata -D
-yarn add @babel/plugin-proposal-decorators -D
-yarn add @babel/plugin-proposal-class-properties -D
-yarn add @babel/preset-env -D
-*/
