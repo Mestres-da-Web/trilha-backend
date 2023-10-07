@@ -6,6 +6,8 @@ import { UserRoles } from '../../users/model/User';
 import { verifyPermission } from '../../../shared/middleware/verifyPersmissions';
 import multer from 'multer';
 import { uploadConfig } from '../../../config/upload';
+import { createProductMiddleware, deleteProductMiddleware, indexProductMiddleware, showProductMiddleware, updateProductMiddleware } from './validator/products.validation';
+
 
 const uploadMulter = multer(uploadConfig.multer)
 
@@ -15,15 +17,15 @@ const productsRouter = Router();
 const productController = new ProductController();
 
 
-productsRouter.post('/',uploadMulter.array('images'), verifyPermission([UserRoles.master]), productController.create);
+productsRouter.post('/', uploadMulter.array('images'), createProductMiddleware, verifyPermission([UserRoles.master]), productController.create);
 
-productsRouter.get('/', productController.list);
+productsRouter.get('/', indexProductMiddleware, productController.list);
 
-productsRouter.get('/:id', productController.show);
+productsRouter.get('/:id', showProductMiddleware, productController.show);
 
-productsRouter.delete('/:id',verifyPermission([UserRoles.master]), productController.delete);
+productsRouter.delete('/:id',deleteProductMiddleware, verifyPermission([UserRoles.master]), productController.delete);
 
-productsRouter.put('/:id', verifyPermission([UserRoles.master]), productController.update);
+productsRouter.put('/:id', updateProductMiddleware, verifyPermission([UserRoles.master]), productController.update);
 
 
 

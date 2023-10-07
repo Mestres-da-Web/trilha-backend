@@ -7,11 +7,11 @@ import { IBrandsRepository } from '../repositories/IBrandsRepository';
 import { IProductsRepository } from '../repositories/IProductsRepository';
 import { ISpecificationsRepository } from '../repositories/ISpecificationsRepository';
 import {inject, injectable} from 'tsyringe'
+import {instanceToInstance} from 'class-transformer'
 
 interface IRequest {
   name: string;
   brand_id: string;
-  stock?: number;
   specification_id?: string;
   filenames?: string[];
 }
@@ -28,11 +28,12 @@ class CreateProductService {
     @inject('BrandsRepository')
     private brandsRepository: IBrandsRepository,
 
-    @inject('StorageProvider')
+    @inject("StorageProvider")
     private storageProvider: IStorageProviderDto,
+
     ) {}
 
-  async execute({ name, brand_id, specification_id, filenames, stock }: IRequest): Promise<Product> {
+  async execute({ name, brand_id, specification_id, filenames }: IRequest): Promise<Product> {
     const brand = this.brandsRepository.findBy({
       id: brand_id
     });
@@ -53,20 +54,20 @@ class CreateProductService {
       }
     }
 
-    const product = this.productsRepository.create({ name, specification_id, brand_id, stock });
-    if(filenames){
-      const savedFileNames = await Promise.all(
-        filenames.map(file => {
-          return this.storageProvider.saveFile(file);
-        }),
-      )
+    const savedPromisesFiles = filenames?.map(async fileName => {
+      return await this.storageProvider.saveFile(fileName);
+    }).filter(filenames => filenames);
 
-      product.images = savedFileNames;
-    }
+    const savedFiles = await Promise.all(savedPromisesFiles as Promise<string>[])
+
+
+
+
+    const product = this.productsRepository.create({ name, specification_id, brand_id, images: savedFiles });
 
     const savedProduct = this.productsRepository.save(product);
 
-    return savedProduct;
+    return instanceToInstance(savedProduct);
   }
 }
 

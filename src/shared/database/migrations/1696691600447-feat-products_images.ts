@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class featProductsImages1696093546913 implements MigrationInterface {
-    name = 'featProductsImages1696093546913'
+export class featProductsImages1696691600447 implements MigrationInterface {
+    name = 'featProductsImages1696691600447'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE "products" ADD "images" character varying array NOT NULL DEFAULT '{}'`);

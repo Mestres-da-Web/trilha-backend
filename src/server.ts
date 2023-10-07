@@ -13,6 +13,8 @@ import { sessionsRouter } from './modules/users/routes/session.routes';
 import { cartRouter } from './modules/carts/routers/cart.routes';
 import { addressesRouter } from './modules/address/routes/address.routes';
 import { ordersRouter } from './modules/order/routes/user.routes';
+import { uploadConfig } from './config/upload';
+import { AppError } from './AppError';
 
 
 const app = express();
@@ -31,6 +33,8 @@ app.use('/session', sessionsRouter);
 app.use('/cart', cartRouter);
 app.use('/address', addressesRouter);
 app.use('/order', ordersRouter);
+app.use('/files', express.static(uploadConfig.uploadsFolder));
+
 
 
 app.get('/', (req, res) => {1
@@ -40,6 +44,7 @@ app.get('/', (req, res) => {1
 app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
+
 
 app.use(globalErrorHandler);
 

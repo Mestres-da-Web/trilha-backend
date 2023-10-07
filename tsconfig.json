@@ -15,6 +15,12 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
   },
+  "paths": {
+    "@config/*": ["src/config/*"],
+    "@modules/*": ["src/modules/*"],
+    "@shared/*": ["src/shared/*"],
+    "@error/*": ["src/shared/errors/*"]
+  },
   "exclude": ["prettier.config.js", "dist/*"],
   "include": ["./src/**/*"]
 }

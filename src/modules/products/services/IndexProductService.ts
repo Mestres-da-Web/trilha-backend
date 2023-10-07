@@ -4,6 +4,7 @@ import { Product } from '../model/Product';
 import { IProductsRepository } from '../repositories/IProductsRepository';
 import { IPaginatedRequest } from '../../../shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from '../../../shared/interfaces/IPaginatedResponse';
+import {instanceToInstance} from 'class-transformer'
 
 @injectable()
 class IndexProductService {
@@ -17,7 +18,12 @@ class IndexProductService {
       ...paginatedRequest
     });
 
-    return products;
+    return {
+      results: instanceToInstance(products.results),
+      limit: products.limit,
+      page: products.page,
+      total: products.total,
+    };
   }
 }
 

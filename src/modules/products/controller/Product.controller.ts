@@ -13,11 +13,11 @@ class ProductController {
 
         const files = request.files as Express.Multer.File[];
 
-        const filenames = files.map(file => file.filename);
+        const filenames = files.map(file => file.filename)
 
         const createProductService = container.resolve(CreateProductService);
 
-        const product = await createProductService.execute({name, brand_id, specification_id, stock, filenames});
+        const product = await createProductService.execute({name, brand_id, specification_id, filenames});
 
         return response.status(200).send(product);
 

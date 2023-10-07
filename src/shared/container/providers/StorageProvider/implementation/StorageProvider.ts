@@ -1,7 +1,7 @@
-import { AppError } from "../../../../../AppError";
 import { IStorageProviderDto } from "../model/IStorageProvider";
-import fs from 'fs'
+import fs from 'fs';
 import path from 'path'
+import { AppError } from "../../../../../AppError";
 import { uploadConfig } from "../../../../../config/upload";
 
 export class StorageProvider implements IStorageProviderDto {
@@ -11,20 +11,23 @@ export class StorageProvider implements IStorageProviderDto {
                 path.resolve(uploadConfig.tmpFolder, file),
                 path.resolve(uploadConfig.uploadsFolder, file)
             )
+
         }catch(err){
-            throw new AppError("Erro ao salvar o arquivo: "+err, 400)
+            throw new AppError("Erro ao salvar o arquivo: "+ err, 400);
         }
 
-        return file;
+        return file
     }
 
     async deleteFile(file: string): Promise<void> {
         const filePath = path.resolve(uploadConfig.uploadsFolder, file);
+
         try{
             await fs.promises.stat(filePath);
-        } catch(err){
+        }catch(err) {
             return;
         }
-        await fs.promises.unlink(file);
+
+        await fs.promises.unlink(file)
     }
 }
