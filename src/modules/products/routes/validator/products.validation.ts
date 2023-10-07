@@ -4,7 +4,8 @@ export const createProductMiddleware = celebrate({
     [Segments.BODY]: {
         name: Joi.string().required().label('nome do produto'),
         brand_id: Joi.string().uuid().required().label("id do produto"),
-        specification_id: Joi.string().label("id da especificação")
+        specification_id: Joi.string().label("id da especificação"),
+        stock: Joi.number().label("quantidade do estoque").default(0)
     }
 });
 
@@ -16,7 +17,9 @@ export const updateProductMiddleware = celebrate({
     [Segments.BODY]: {
         name: Joi.string().label('nome do produto'),
         brand_id: Joi.string().uuid().label("id do produto"),
-        specification_id: Joi.string().label("id da especificação")
+        specification_id: Joi.string().label("id da especificação"),
+        stock: Joi.number().label("quantidade do estoque")
+        
     }
 });
 

@@ -5,6 +5,7 @@ import { ICartsRepository } from '../repositories/ICartsRepository';
 import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
 import { AppError } from '@shared/erros/AppError';
+import { instanceToInstance } from 'class-transformer';
 
 interface IRequest {
   request_id: string;
@@ -32,7 +33,7 @@ class ShowCartService {
       throw new AppError("Carrinho não encontrado", 404);
     }
 
-    return cart;
+    return instanceToInstance(cart);
   }
 }
 

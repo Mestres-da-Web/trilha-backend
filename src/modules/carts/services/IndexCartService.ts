@@ -4,6 +4,7 @@ import { Cart } from '../model/cart';
 import { ICartsRepository } from '../repositories/ICartsRepository';
 import { IPaginatedRequest } from '@shared/interfaces/IPaginatedRequest';
 import { IPaginatedResponse } from '@shared/interfaces/IPaginatedResponse';
+import { instanceToInstance } from 'class-transformer';
 
 @injectable()
 class IndexCartService {
@@ -20,7 +21,12 @@ class IndexCartService {
       filters: paginatedRequest.filters,
     });
 
-    return carts;
+    return {
+      results: instanceToInstance(carts.results),
+      page: carts.page,
+      limit: carts.limit,
+      total: carts.total
+    };
   }
 }
 

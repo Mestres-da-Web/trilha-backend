@@ -34,7 +34,7 @@ class CreateProductService {
 
     ) {}
 
-  async execute({ name, brand_id, specification_id, filenames }: IRequest): Promise<Product> {
+  async execute({ name, brand_id, specification_id, filenames, stock }: IRequest): Promise<Product> {
     const brand = this.brandsRepository.findBy({
       id: brand_id
     });
@@ -64,7 +64,7 @@ class CreateProductService {
 
 
 
-    const product = this.productsRepository.create({ name, specification_id, brand_id, images: savedFiles });
+    const product = this.productsRepository.create({ name, specification_id, brand_id, images: savedFiles, stock });
 
     const savedProduct = this.productsRepository.save(product);
 
